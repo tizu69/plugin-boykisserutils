@@ -1,0 +1,7 @@
+name: boykisserutils
+version: 1.0.0
+main: dev.tizu.boykisserutils.ThisPlugin
+description: things i (tizu) made for the boykisser kissies guild
+author: tizu.dev
+website: https://tizu.dev
+api-version: "1.21.5"
