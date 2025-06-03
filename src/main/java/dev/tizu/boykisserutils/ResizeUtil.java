@@ -3,6 +3,9 @@ package dev.tizu.boykisserutils;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Player;
+
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -45,21 +48,33 @@ public class ResizeUtil {
                 var sender = context.getSource().getSender();
                 var sizestr = context.getArgument("size", String.class);
 
+                var executor = context.getSource().getExecutor();
+                if (!(executor instanceof Player player)) {
+                    sender.sendMessage(Component.text(
+                            "You must change scale of a player only", NamedTextColor.RED));
+                    return 0;
+                }
+
                 float height, convheight;
                 try {
                     height = roundTo2(getParsedHeight(sizestr));
-                    if (height <= 1.8f / 16f) // minecraft has a hard limit on client for this
+                    // minecraft has a hard limit on client for this
+                    if (height <= 1.8f / 16f)
                         throw new IllegalStateException("You must be at least somewhat tall");
                     if (height > MAX_HEIGHT)
-                        throw new IllegalStateException("You must be at most " + MAX_HEIGHT
-                                + "m tall, not " + height + "m");
+                        throw new IllegalStateException(
+                                "You must be at most " + MAX_HEIGHT + "m tall, not " + height + "m");
                     convheight = roundTo2(height / 1.8f);
                 } catch (IllegalStateException e) {
                     sender.sendMessage(Component.text(e.getMessage(), NamedTextColor.RED));
                     return 0;
                 }
 
-                sender.sendActionBar(Component.text("Resized to " + height + "m, aka " + convheight + "st"));
+                player.getAttribute(Attribute.SCALE).setBaseValue(convheight);
+                if (sender != executor)
+                    sender.sendActionBar(Component.text("Changed height to " + height + "m, aka " + convheight + "st"));
+                executor.sendActionBar(
+                        Component.text("Your height has been changed to " + height + "m, aka " + convheight + "st"));
 
                 return Command.SINGLE_SUCCESS;
             }));
