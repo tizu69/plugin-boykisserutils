@@ -71,6 +71,12 @@ public class ResizeUtil {
                 }
 
                 player.getAttribute(Attribute.SCALE).setBaseValue(convheight);
+                player.getAttribute(Attribute.BLOCK_INTERACTION_RANGE).setBaseValue(convheight * 4.5f);
+                player.getAttribute(Attribute.ENTITY_INTERACTION_RANGE).setBaseValue(convheight * 3.0f);
+                player.getAttribute(Attribute.JUMP_STRENGTH).setBaseValue(convheight * 0.42f);
+                player.getAttribute(Attribute.STEP_HEIGHT).setBaseValue(convheight * 0.6f);
+                player.getAttribute(Attribute.GRAVITY).setBaseValue(convheight * 0.08f);
+
                 if (sender != executor)
                     sender.sendActionBar(Component.text("Changed height to " + height + "m, aka " + convheight + "st"));
                 executor.sendActionBar(
