@@ -48,7 +48,7 @@ public class ResizeUtil {
                 float height, convheight;
                 try {
                     height = roundTo2(getParsedHeight(sizestr));
-                    if (height <= 0.01f)
+                    if (height <= 1f / 16f) // minecraft has a hard limit on client for this
                         throw new IllegalStateException("You must be at least somewhat tall");
                     if (height > MAX_HEIGHT)
                         throw new IllegalStateException("You must be at most " + MAX_HEIGHT
