@@ -37,7 +37,7 @@ public class ResizeUtil {
     private static final Map<String, Float> HEIGHTMAP = Map.ofEntries(
             // in-game
             Map.entry("px", 16.0f),
-            Map.entry("steves", 1.8f),
+            Map.entry("steve", 1.8f),
             Map.entry("%", 1.8f / 100.0f),
             // real-world
             Map.entry("cm", 0.01f),
@@ -78,7 +78,7 @@ public class ResizeUtil {
         // default to steves if no unit
         var unit = m.group(2);
         if (unit == null)
-            unit = "steves";
+            unit = "steve";
         // tell the users the accepted units if they fucked up big time
         if (HEIGHTMAP.get(unit) == null)
             throw new IllegalStateException("Invalid unit, expected one of: " +
