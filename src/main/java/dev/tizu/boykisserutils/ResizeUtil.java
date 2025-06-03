@@ -43,7 +43,7 @@ public class ResizeUtil {
             "^(-?\\d*\\.?\\d+)?\s*([%a-zA-Z]+)?$");
     private static final float MAX_HEIGHT = 8.0f;
 
-    public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("height")
+    public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("resize")
             .then(Commands.argument("size", StringArgumentType.greedyString()).executes(context -> {
                 var sender = context.getSource().getSender();
                 var sizestr = context.getArgument("size", String.class);
