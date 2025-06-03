@@ -18,5 +18,5 @@ jobs:
       - name: Upload jar
         uses: actions/upload-artifact@v4
         with:
-          name: jar
-          path: build/libs/*.jar
+          name: boykisserutils.jar
+          path: build/libs/boykisserutils.jar
