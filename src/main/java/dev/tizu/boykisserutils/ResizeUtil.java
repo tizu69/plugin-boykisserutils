@@ -17,7 +17,7 @@ public class ResizeUtil {
     // Map<unit, 1m in unit>
     private static final Map<String, Float> HEIGHTMAP = Map.ofEntries(
             // in-game
-            Map.entry("px", 16.0f),
+            Map.entry("px", 1f / 16.0f),
             Map.entry("steve", 1.8f),
             Map.entry("%", 1.8f / 100.0f),
             // real-world
@@ -48,7 +48,7 @@ public class ResizeUtil {
                 float height, convheight;
                 try {
                     height = roundTo2(getParsedHeight(sizestr));
-                    if (height <= 1f / 16f) // minecraft has a hard limit on client for this
+                    if (height <= 1.8f / 16f) // minecraft has a hard limit on client for this
                         throw new IllegalStateException("You must be at least somewhat tall");
                     if (height > MAX_HEIGHT)
                         throw new IllegalStateException("You must be at most " + MAX_HEIGHT
