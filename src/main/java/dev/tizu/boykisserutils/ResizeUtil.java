@@ -13,25 +13,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
 public class ResizeUtil {
-    public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("height")
-            .then(Commands.argument("size", StringArgumentType.greedyString()).executes(context -> {
-                var sender = context.getSource().getSender();
-                var sizestr = context.getArgument("size", String.class);
-
-                float height;
-                try {
-                    height = getParsedHeight(sizestr);
-                } catch (IllegalStateException e) {
-                    sender.sendMessage(Component.text(e.getMessage(), NamedTextColor.RED));
-                    return 0;
-                }
-
-                var convheight = height / 1.8f;
-                sender.sendActionBar(Component.text("Resized to " + height + "m, aka " + convheight + "st"));
-
-                return Command.SINGLE_SUCCESS;
-            }));
-
     // default minecraft player height reference: 180cm, 1bl = 1m = 16px
     // Map<unit, 1m in unit>
     private static final Map<String, Float> HEIGHTMAP = Map.ofEntries(
@@ -56,7 +37,32 @@ public class ResizeUtil {
             Map.entry("lns", 0.3f),
             Map.entry("catgirl", 1.62f));
     private static final Pattern HEIGHT_REGEX = Pattern.compile(
-            "^(\\d*\\.?\\d+)?\s*([%a-zA-Z]+)?$");
+            "^(-?\\d*\\.?\\d+)?\s*([%a-zA-Z]+)?$");
+    private static final float MAX_HEIGHT = 8.0f;
+
+    public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("height")
+            .then(Commands.argument("size", StringArgumentType.greedyString()).executes(context -> {
+                var sender = context.getSource().getSender();
+                var sizestr = context.getArgument("size", String.class);
+
+                float height, convheight;
+                try {
+                    height = roundTo2(getParsedHeight(sizestr));
+                    if (height <= 0.01f)
+                        throw new IllegalStateException("You must be at least somewhat tall");
+                    if (height > MAX_HEIGHT)
+                        throw new IllegalStateException("You must be at most " + MAX_HEIGHT
+                                + "m tall, not " + height + "m");
+                    convheight = roundTo2(height / 1.8f);
+                } catch (IllegalStateException e) {
+                    sender.sendMessage(Component.text(e.getMessage(), NamedTextColor.RED));
+                    return 0;
+                }
+
+                sender.sendActionBar(Component.text("Resized to " + height + "m, aka " + convheight + "st"));
+
+                return Command.SINGLE_SUCCESS;
+            }));
 
     /**
      * Parses a height string into a float.
@@ -85,5 +91,9 @@ public class ResizeUtil {
                     String.join(", ", HEIGHTMAP.keySet()));
 
         return num * HEIGHTMAP.get(unit);
+    }
+
+    private static float roundTo2(float f) {
+        return (float) Math.round(f * 100) / 100;
     }
 }
