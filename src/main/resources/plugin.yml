@@ -5,3 +5,8 @@ description: things i (tizu) made for the boykisser kissies guild
 author: tizu.dev
 website: https://tizu.dev
 api-version: "1.21.5"
+
+permissions:
+  boykisser.commandblock.place:
+    description: Let players place command blocks
+    default: op
