@@ -17,6 +17,7 @@ public class BlockPlaceUtil implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK ||
+                event.getItem() == null ||
                 event.getItem().getType() != Material.COMMAND_BLOCK ||
                 event.getPlayer().getGameMode() != GameMode.CREATIVE ||
                 !event.getPlayer().hasPermission("boykisser.commandblock.place") ||
