@@ -11,9 +11,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class BlockPlaceUtil implements Listener {
-    // HACK: this requires a mod such as https://modrinth.com/plugin/f3nperm to work.
+    // HACK: this requires a mod such as https://modrinth.com/plugin/f3nperm to
+    // work.
     // the server BKU is built for has this, so I cba to reimplement it.
-    
+
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK ||
@@ -29,6 +30,9 @@ public class BlockPlaceUtil implements Listener {
         if (targetPos.getType() != Material.AIR)
             return;
         var targetFace = getFacingDirection(event.getPlayer()).getOppositeFace();
+
+        ThisPlugin.instance.getLogger().info("Placing command block at " + targetPos.getLocation()
+                + ", as instructed by " + event.getPlayer().getName());
 
         targetPos.setType(Material.COMMAND_BLOCK);
         var directional = (Directional) targetPos.getBlockData();
