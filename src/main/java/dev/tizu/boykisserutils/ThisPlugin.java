@@ -16,6 +16,7 @@ public class ThisPlugin extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new BlockPlaceUtil(), this);
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             commands.registrar().register(ResizeUtil.COMMAND.build());
+            commands.registrar().register(PingUtil.COMMAND.build());
         });
     }
 }
