@@ -1,4 +1,4 @@
-package dev.tizu.boykisserutils;
+package dev.tizu.boykisserutils.tweaks;
 
 import org.bukkit.Bukkit;
 
@@ -10,7 +10,7 @@ import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-public class PingUtil {
+public class PingTweak {
     public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("ping")
             .executes(context -> {
                 var sender = context.getSource().getSender();

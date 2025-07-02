@@ -1,4 +1,4 @@
-package dev.tizu.boykisserutils;
+package dev.tizu.boykisserutils.tweaks;
 
 import java.util.UUID;
 
@@ -17,17 +17,17 @@ import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
+import dev.tizu.boykisserutils.ThisPlugin;
 import dev.tizu.boykisserutils.util.Units;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-public class CarUtil implements Listener {
+public class CarTweak implements Listener {
     public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("car")
             .then(Commands.argument("perSecond", StringArgumentType.string()).executes(context -> {
                 var bps = context.getArgument("perSecond", String.class);

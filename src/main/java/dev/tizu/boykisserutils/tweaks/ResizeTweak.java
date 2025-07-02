@@ -1,4 +1,4 @@
-package dev.tizu.boykisserutils;
+package dev.tizu.boykisserutils.tweaks;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -13,7 +13,7 @@ import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-public class ResizeUtil {
+public class ResizeTweak {
     private static final float MAX_HEIGHT = 8.0f;
 
     public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("resize")

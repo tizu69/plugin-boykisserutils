@@ -1,4 +1,4 @@
-package dev.tizu.boykisserutils;
+package dev.tizu.boykisserutils.tweaks;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -10,7 +10,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
-public class BlockPlaceUtil implements Listener {
+import dev.tizu.boykisserutils.ThisPlugin;
+
+public class BlockPlaceTweak implements Listener {
     // HACK: this requires a mod such as https://modrinth.com/plugin/f3nperm to
     // work.
     // the server BKU is built for has this, so I cba to reimplement it.
