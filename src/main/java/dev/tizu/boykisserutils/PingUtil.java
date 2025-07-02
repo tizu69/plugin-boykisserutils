@@ -1,14 +1,8 @@
 package dev.tizu.boykisserutils;
 
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Player;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
