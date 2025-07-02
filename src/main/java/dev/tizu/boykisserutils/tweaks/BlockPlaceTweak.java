@@ -14,8 +14,7 @@ import dev.tizu.boykisserutils.ThisPlugin;
 
 public class BlockPlaceTweak implements Listener {
     // HACK: this requires a mod such as https://modrinth.com/plugin/f3nperm to
-    // work.
-    // the server BKU is built for has this, so I cba to reimplement it.
+    // work. the server BKU is built for has this, so I cba to reimplement it.
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
