@@ -32,12 +32,13 @@ public class CarUtil implements Listener {
             .then(Commands.argument("perSecond", StringArgumentType.string()).executes(context -> {
                 var bps = context.getArgument("perSecond", String.class);
                 return spawnCar(context.getSource().getExecutor(), bps, true);
-            })
-                    .then(Commands.argument("randomStyle", BoolArgumentType.bool()).executes(context -> {
-                        var bps = context.getArgument("perSecond", String.class);
-                        var randomMapped = context.getArgument("randomStyle", Boolean.class);
-                        return spawnCar(context.getSource().getExecutor(), bps, !randomMapped);
-                    })))
+            }))
+            // .then(Commands.argument("randomStyle",
+            // BoolArgumentType.bool()).executes(context -> {
+            // var bps = context.getArgument("perSecond", String.class);
+            // var randomMapped = context.getArgument("randomStyle", Boolean.class);
+            // return spawnCar(context.getSource().getExecutor(), bps, !randomMapped);
+            // }))
             .executes(context -> {
                 return spawnCar(context.getSource().getExecutor(), 20, true);
             });
