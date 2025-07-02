@@ -44,7 +44,7 @@ public class CarUtil implements Listener {
             });
 
     private static int spawnCar(Entity executor, float bps, boolean playerMapped) {
-        if (bps <= 0) {
+        if (bps <= 1) {
             executor.sendMessage(Component.text("Cars move forwards.", NamedTextColor.RED));
             return Command.SINGLE_SUCCESS;
         } else if (bps > 50) {
