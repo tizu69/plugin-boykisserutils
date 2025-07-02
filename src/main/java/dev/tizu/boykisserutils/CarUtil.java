@@ -18,21 +18,23 @@ import org.bukkit.inventory.ItemStack;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.BoolArgumentType;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
+import dev.tizu.boykisserutils.util.Units;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 public class CarUtil implements Listener {
     public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("car")
-            .then(Commands.argument("bps", IntegerArgumentType.integer(1, 50)).executes(context -> {
-                var bps = context.getArgument("bps", Integer.class);
+            .then(Commands.argument("perSecond", StringArgumentType.string()).executes(context -> {
+                var bps = context.getArgument("perSecond", String.class);
                 return spawnCar(context.getSource().getExecutor(), bps, true);
             })
                     .then(Commands.argument("randomStyle", BoolArgumentType.bool()).executes(context -> {
-                        var bps = context.getArgument("bps", Integer.class);
+                        var bps = context.getArgument("perSecond", String.class);
                         var randomMapped = context.getArgument("randomStyle", Boolean.class);
                         return spawnCar(context.getSource().getExecutor(), bps, !randomMapped);
                     })))
@@ -41,6 +43,14 @@ public class CarUtil implements Listener {
             });
 
     private static int spawnCar(Entity executor, float bps, boolean playerMapped) {
+        if (bps <= 0) {
+            executor.sendMessage(Component.text("Cars move forwards.", NamedTextColor.RED));
+            return Command.SINGLE_SUCCESS;
+        } else if (bps > 50) {
+            executor.sendMessage(Component.text("Cars don't go that fast!", NamedTextColor.RED));
+            return Command.SINGLE_SUCCESS;
+        }
+
         if (!(executor instanceof Player player))
             return Command.SINGLE_SUCCESS;
 
@@ -70,6 +80,16 @@ public class CarUtil implements Listener {
                 });
 
         return Command.SINGLE_SUCCESS;
+    }
+
+    private static int spawnCar(Entity executor, String bps, boolean playerMapped) {
+        try {
+            var parsed = Units.parse(bps, "m", 0.01f);
+            return spawnCar(executor, parsed, playerMapped);
+        } catch (IllegalStateException e) {
+            executor.sendMessage(Component.text(e.getMessage(), NamedTextColor.RED));
+            return Command.SINGLE_SUCCESS;
+        }
     }
 
     /** set color and style based on the uuid. */
