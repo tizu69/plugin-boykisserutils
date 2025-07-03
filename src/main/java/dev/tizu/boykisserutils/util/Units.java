@@ -12,12 +12,14 @@ public class Units {
             // real-world
             Map.entry("cm", 0.01f),
             Map.entry("m", 1.0f),
+            Map.entry("km", 1000.0f),
             Map.entry("in", 0.0254f),
             Map.entry("inch", 0.0254f),
             Map.entry("ft", 0.3048f),
             Map.entry("foot", 0.3048f),
             Map.entry("yd", 0.9144f),
             Map.entry("yard", 0.9144f),
+            Map.entry("mi", 1609.34f),
             // people
             Map.entry("nico", 1.65f),
             Map.entry("tizu", 1.87f),
