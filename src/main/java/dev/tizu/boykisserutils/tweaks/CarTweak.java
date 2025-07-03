@@ -29,17 +29,16 @@ import net.kyori.adventure.text.format.NamedTextColor;
 
 public class CarTweak implements Listener {
     public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("car")
-            .then(Commands.argument("perSecond", StringArgumentType.string()).executes(context -> {
-                var bps = context.getArgument("perSecond", String.class);
-                return spawnCar(context.getSource().getExecutor(), bps, true);
-            }))
-            // .then(Commands.argument("randomStyle",
-            // BoolArgumentType.bool()).executes(context -> {
-            // var bps = context.getArgument("perSecond", String.class);
-            // var randomMapped = context.getArgument("randomStyle", Boolean.class);
-            // return spawnCar(context.getSource().getExecutor(), bps, !randomMapped);
-            // }))
-            .executes(context -> {
+            .then(Commands.argument("speed", StringArgumentType.string()).executes(context -> {
+                var bps = context.getArgument("speed", String.class);
+                return spawnCar(context.getSource().getExecutor(), bps, 1, true);
+            }).then(Commands.literal("minutely").executes(context -> {
+                var bpm = context.getArgument("speed", String.class);
+                return spawnCar(context.getSource().getExecutor(), bpm, 60, true);
+            })).then(Commands.literal("hourly").executes(context -> {
+                var bph = context.getArgument("speed", String.class);
+                return spawnCar(context.getSource().getExecutor(), bph, 3600, true);
+            }))).executes(context -> {
                 return spawnCar(context.getSource().getExecutor(), 20, true);
             });
 
@@ -83,10 +82,10 @@ public class CarTweak implements Listener {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int spawnCar(Entity executor, String bps, boolean playerMapped) {
+    private static int spawnCar(Entity executor, String str, float mul, boolean playerMapped) {
         try {
-            var parsed = Units.parse(bps, "m", 0.01f);
-            return spawnCar(executor, parsed, playerMapped);
+            var parsed = Units.parse(str, "m", 0.01f);
+            return spawnCar(executor, parsed / mul, playerMapped);
         } catch (IllegalStateException e) {
             executor.sendMessage(Component.text(e.getMessage(), NamedTextColor.RED));
             return Command.SINGLE_SUCCESS;
