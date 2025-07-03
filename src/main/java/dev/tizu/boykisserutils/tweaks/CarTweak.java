@@ -39,7 +39,7 @@ public class CarTweak implements Listener {
                 var bph = context.getArgument("speed", String.class);
                 return spawnCar(context.getSource().getExecutor(), bph, 3600, true);
             }))).executes(context -> {
-                return spawnCar(context.getSource().getExecutor(), 20, true);
+                return spawnCar(context.getSource().getExecutor(), 14, true); // 50km/h
             });
 
     private static int spawnCar(Entity executor, float bps, boolean playerMapped) {
