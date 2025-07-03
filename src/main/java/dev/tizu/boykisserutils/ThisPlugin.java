@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import dev.tizu.boykisserutils.tweaks.BlockPlaceTweak;
+import dev.tizu.boykisserutils.tweaks.CommandBlockTweak;
 import dev.tizu.boykisserutils.tweaks.CarTweak;
 import dev.tizu.boykisserutils.tweaks.PingTweak;
 import dev.tizu.boykisserutils.tweaks.ResizeTweak;
@@ -16,7 +16,7 @@ public class ThisPlugin extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         instance = this;
-        Bukkit.getPluginManager().registerEvents(new BlockPlaceTweak(), this);
+        Bukkit.getPluginManager().registerEvents(new CommandBlockTweak(), this);
         Bukkit.getPluginManager().registerEvents(new CarTweak(), this);
         this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             commands.registrar().register(ResizeTweak.COMMAND.build());

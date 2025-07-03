@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import dev.tizu.boykisserutils.ThisPlugin;
 
-public class BlockPlaceTweak implements Listener {
+public class CommandBlockTweak implements Listener {
     // HACK: this requires a mod such as https://modrinth.com/plugin/f3nperm to
     // work. the server BKU is built for has this, so I cba to reimplement it.
 
