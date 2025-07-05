@@ -46,7 +46,7 @@ public class CarTweak implements Listener {
         if (bps <= 1) {
             executor.sendMessage(Component.text("Cars move forwards.", NamedTextColor.RED));
             return Command.SINGLE_SUCCESS;
-        } else if (bps > 50) {
+        } else if (bps > 343) {
             executor.sendMessage(Component.text("Cars don't go that fast!", NamedTextColor.RED));
             return Command.SINGLE_SUCCESS;
         }
