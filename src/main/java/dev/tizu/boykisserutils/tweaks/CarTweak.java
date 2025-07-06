@@ -2,6 +2,7 @@ package dev.tizu.boykisserutils.tweaks;
 
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -108,9 +109,11 @@ public class CarTweak implements Listener {
                 || !entity.getScoreboardTags().contains("bku_kill_on_dismount"))
             return;
 
-        entity.remove();
-        ThisPlugin.instance.getLogger().info(entity.getName() + " ("
-                + entity.getUniqueId().toString() + ") has been killed: had bku_kill_on_dismount "
-                + "tag equipped");
+        Bukkit.getScheduler().runTask(ThisPlugin.instance, () -> {
+            entity.remove();
+            ThisPlugin.instance.getLogger().info(entity.getName() + " ("
+                    + entity.getUniqueId().toString() + ") has been killed: had bku_kill_on_dismount "
+                    + "tag equipped");
+        });
     }
 }
