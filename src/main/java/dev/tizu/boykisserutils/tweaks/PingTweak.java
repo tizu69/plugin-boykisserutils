@@ -11,11 +11,11 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
 public class PingTweak {
-    public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("ping")
-            .executes(context -> {
-                var sender = context.getSource().getSender();
-                var ping = Bukkit.getServer().getPlayer(sender.getName()).getPing();
-                sender.sendMessage(Component.text("Ping! (" + ping + "ms)", NamedTextColor.GREEN));
-                return Command.SINGLE_SUCCESS;
-            });
+	public static final LiteralArgumentBuilder<CommandSourceStack> COMMAND = Commands.literal("ping")
+			.executes(context -> {
+				var sender = context.getSource().getSender();
+				var ping = Bukkit.getServer().getPlayer(sender.getName()).getPing();
+				sender.sendMessage(Component.text("Ping! (" + ping + "ms)", NamedTextColor.GREEN));
+				return Command.SINGLE_SUCCESS;
+			});
 }

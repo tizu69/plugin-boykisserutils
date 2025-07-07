@@ -12,18 +12,18 @@ import dev.tizu.boykisserutils.tweaks.TrowelTweak;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 
 public class ThisPlugin extends JavaPlugin implements Listener {
-    public static ThisPlugin instance;
+	public static ThisPlugin instance;
 
-    @Override
-    public void onEnable() {
-        instance = this;
-        Bukkit.getPluginManager().registerEvents(new CommandBlockTweak(), this);
-        Bukkit.getPluginManager().registerEvents(new CarTweak(), this);
-        Bukkit.getPluginManager().registerEvents(new TrowelTweak(), this);
-        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-            commands.registrar().register(ResizeTweak.COMMAND.build());
-            commands.registrar().register(PingTweak.COMMAND.build());
-            commands.registrar().register(CarTweak.COMMAND.build());
-        });
-    }
+	@Override
+	public void onEnable() {
+		instance = this;
+		Bukkit.getPluginManager().registerEvents(new CommandBlockTweak(), this);
+		Bukkit.getPluginManager().registerEvents(new CarTweak(), this);
+		Bukkit.getPluginManager().registerEvents(new TrowelTweak(), this);
+		this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
+			commands.registrar().register(ResizeTweak.COMMAND.build());
+			commands.registrar().register(PingTweak.COMMAND.build());
+			commands.registrar().register(CarTweak.COMMAND.build());
+		});
+	}
 }
