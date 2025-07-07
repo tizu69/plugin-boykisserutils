@@ -22,7 +22,7 @@ public class TrowelTweak implements Listener {
         for (int i = 0; i < 9; i++) {
             var item = player.getInventory().getItem(i);
             if (item != null && item.getType().isBlock())
-                slots.add(i);
+                for (int j = 0; j < item.getAmount(); j++) slots.add(i);
         }
         if (slots.size() == 0)
             return;
