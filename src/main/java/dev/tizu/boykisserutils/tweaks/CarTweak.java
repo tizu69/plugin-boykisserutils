@@ -22,7 +22,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
 import dev.tizu.boykisserutils.ThisPlugin;
-import dev.tizu.boykisserutils.util.Units;
+import dev.tizu.boykisserutils.util.DistanceUnits;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
@@ -85,7 +85,7 @@ public class CarTweak implements Listener {
 
 	private static int spawnCar(Entity executor, String str, float mul, boolean playerMapped) {
 		try {
-			var parsed = Units.parse(str, "m", 0.01f);
+			var parsed = DistanceUnits.parse(str, "m", 0.01f);
 			return spawnCar(executor, parsed / mul, playerMapped);
 		} catch (IllegalStateException e) {
 			executor.sendMessage(Component.text(e.getMessage(), NamedTextColor.RED));

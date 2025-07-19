@@ -3,7 +3,7 @@ package dev.tizu.boykisserutils.util;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class Units {
+public class DistanceUnits {
 	private static final Map<String, Float> MAP = Map.ofEntries(
 			// in-game
 			Map.entry("px", 1f / 16.0f),

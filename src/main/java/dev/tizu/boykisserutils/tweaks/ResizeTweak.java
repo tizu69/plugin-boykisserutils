@@ -7,7 +7,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
-import dev.tizu.boykisserutils.util.Units;
+import dev.tizu.boykisserutils.util.DistanceUnits;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import net.kyori.adventure.text.Component;
@@ -30,7 +30,7 @@ public class ResizeTweak {
 
 				float height, convheight;
 				try {
-					height = Units.parse(sizestr, "steves", 1.8f / 100.0f);
+					height = DistanceUnits.parse(sizestr, "steves", 1.8f / 100.0f);
 					// minecraft has a hard limit on client for this
 					if (height <= 2.0f / 16.0f)
 						throw new IllegalStateException("You must be at least somewhat tall");
