@@ -24,15 +24,14 @@ public class DistanceUnits {
 			Map.entry("nico", 1.65f),
 			Map.entry("tizu", 1.87f),
 			// joke
-			Map.entry("cat", 0.24f),
 			Map.entry("lns", 0.3f),
-			Map.entry("catgirl", 1.62f));
+			Map.entry("catgirl", 1.6f));
 	private static final Pattern REGEX = Pattern.compile(
 			"^(-?\\d*\\.?\\d+)?\s*([%a-zA-Z]+)?$");
 
 	/**
 	 * Parses a string into a float.
-	 * 
+	 *
 	 * @param s                The string to parse.
 	 * @param fallbackUnit     The unit to use if the unit is not specified.
 	 * @param metersPerPercent How many meters are in 1%?
