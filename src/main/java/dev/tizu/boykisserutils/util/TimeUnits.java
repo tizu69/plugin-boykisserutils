@@ -22,13 +22,15 @@ public class TimeUnits {
 		int charpos = 0;
 		while (charpos < s.length()) {
 			int start = charpos;
-			while (charpos < s.length() && Character.isDigit(s.charAt(charpos))) charpos++;
+			while (charpos < s.length() && Character.isDigit(s.charAt(charpos)))
+				charpos++;
 			if (start == charpos)
 				throw new IllegalStateException("Expected number at position " + (start + 1));
 			int num = Integer.parseInt(s.substring(start, charpos));
 
 			int unitStart = charpos;
-			while (charpos < s.length() && Character.isLetter(s.charAt(charpos))) charpos++;
+			while (charpos < s.length() && Character.isLetter(s.charAt(charpos)))
+				charpos++;
 			if (unitStart == charpos)
 				throw new IllegalStateException("Expected unit at position " + (unitStart + 1));
 			String unit = s.substring(unitStart, charpos);
