@@ -1,5 +1,6 @@
 package dev.tizu.boykisserutils.util;
 
+import java.util.List;
 import java.util.Map;
 
 public class TimeUnits {
@@ -44,4 +45,27 @@ public class TimeUnits {
 		}
 		return ticks;
 	}
+
+	/**
+	 * Unparses a tick count into a string, using the largest full units possible,
+	 * in the form [num][unit][num][unit]...
+	 */
+	public static String unparse(int ticks) {
+		StringBuilder result = new StringBuilder();
+		int remaining = ticks;
+		List<Map.Entry<String, Integer>> units = MAP.entrySet().stream()
+				.sorted((a, b) -> Integer.compare(b.getValue(), a.getValue()))
+				.toList();
+		for (Map.Entry<String, Integer> entry : units) {
+			String unit = entry.getKey();
+			int unitTicks = entry.getValue();
+			int count = remaining / unitTicks;
+			if (count > 0) {
+				result.append(count).append(unit);
+				remaining %= unitTicks;
+			}
+		}
+		return result.toString();
+	}
+
 }
