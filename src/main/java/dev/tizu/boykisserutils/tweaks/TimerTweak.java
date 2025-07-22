@@ -69,6 +69,7 @@ public class TimerTweak {
 					player.playSound(Sound.sound(Key.key("block.note_block.bell"),
 							Source.MASTER, 1, 0.6f));
 				}, i * 2l);
+			deleteExpired();
 		}, dura);
 		tasks.add(new Timer(task, System.currentTimeMillis(), dura, namestr));
 		timers.put(executor.getUniqueId(), tasks);
@@ -131,6 +132,17 @@ public class TimerTweak {
 		return Command.SINGLE_SUCCESS;
 	}
 
+	private static void deleteExpired() {
+		for (var entry : timers.entrySet()) {
+			var tasks = entry.getValue();
+			for (var i = tasks.size() - 1; i >= 0; i--)
+				if (tasks.get(i).isExpired()) {
+					tasks.get(i).cancel();
+					tasks.remove(i);
+				}
+		}
+	}
+
 	public record Timer(BukkitTask task, long start, long duration, String name) {
 		public void cancel() {
 			task.cancel();
@@ -138,6 +150,10 @@ public class TimerTweak {
 
 		public String unparse() {
 			return TimeUnits.unparse((int) (duration - (System.currentTimeMillis() - start) / 50));
+		}
+
+		public boolean isExpired() {
+			return Bukkit.getScheduler().isQueued(task.getTaskId());
 		}
 	}
 }
