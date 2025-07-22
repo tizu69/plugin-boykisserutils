@@ -51,6 +51,9 @@ public class TimeUnits {
 	 * in the form [num][unit][num][unit]...
 	 */
 	public static String unparse(int ticks) {
+		if (ticks <= 0)
+			return ticks + "t";
+
 		StringBuilder result = new StringBuilder();
 		int remaining = ticks;
 		List<Map.Entry<String, Integer>> units = MAP.entrySet().stream()
